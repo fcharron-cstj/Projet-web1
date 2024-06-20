@@ -2,37 +2,53 @@
 
 namespace Bases;
 
-class Controller {
+class Controller
+{
     /**
-     * Prend en charge les routes inexistantes et affiche une erreur 404
+     * Redirects to the page error404
      * 
      * @return void
      */
-    public function erreur404() {
-        $this->vue("erreurs/404", [
+    public function erreur404()
+    {
+        $this->view("erreurs/404", [
             "titre" => "Page introuvable"
         ]);
     }
 
     /**
-     * Redirige à l'URL fourni
+     * Redirects the user to the homepage if there is no user_id in the session
+     *
+     * @return void
+     */
+    public function protectRoute()
+    {
+        if (empty($_SESSION["user_id"])) {
+            $this->redirect("index");
+        }
+    }
+
+    /**
+     * Redirects to the URL given
      *
      * @param string $url
      * @return void
      */
-    protected function rediriger($url) {
+    protected function redirect($url)
+    {
         header("location: $url");
         exit();
     }
 
     /**
-     * Inclut la vue spécifiée
+     * Includes the view given
      *
      * @param string $chemin
      * @param array $donnees
      * @return void
      */
-    protected function vue($chemin, $donnees = []){
+    protected function view($chemin, $donnees = [])
+    {
         extract($donnees);
         include("views/$chemin.view.php");
     }

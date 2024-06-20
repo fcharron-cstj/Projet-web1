@@ -6,5 +6,8 @@
  * Format: url => [Controller, méthode]
  */
 $routes = [
-    "index" => ["DefautController", "index"],
+    "index" => ["SiteController", "menu"],
+    "about" => ["SiteController", "aboutUs"],
+    "admin" => ["SiteController", "admin"],
+    "newsletter-subscribe" => ["SiteController", "newsletter-store"],
 ];

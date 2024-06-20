@@ -1,0 +1,307 @@
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+input,
+select,
+textarea,
+button {
+    font-family: "Basic", sans-serif;
+}
+
+body {
+    margin: 0;
+    font-family: "Basic", sans-serif;
+}
+
+nav {
+    background-color: #000000;
+    color: white;
+    height: 130px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 96%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+#menubanner {
+    background-image: url("../../public/img/mainbanner.jpg");
+    width: 100%;
+    height: 700px;
+    object-fit: fill;
+    background-position: 50% 70%;
+}
+
+#logo {
+    width: 165px;
+    height: 110px;
+}
+
+.desktopnav {
+    display: none;
+}
+
+h1 {
+    margin: 0;
+    text-align: center;
+    padding-top: 270px;
+    font-size: 80px;
+    color: white;
+}
+
+footer {
+    display: grid;
+    width:90%;
+    margin:0 auto;
+    padding:0% 5%;
+    background-color: #000000;
+    color: white;
+    height: 580px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr, 1.2fr;
+    gap: 10px;
+}
+
+#contact {
+    grid-column-start: 1;
+}
+
+#newsletter {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+#comments {
+    grid-column-start: 1;
+}
+#comments p{
+width:80%;
+margin:auto;
+}
+main {
+    background-color: #1C1C1C;
+    color: white;
+    margin: 0;
+    width: 100%;
+}
+
+.content {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.appetizer {
+    margin: 0;
+    padding: 16px;
+}
+
+.main {
+    margin: 0;
+    padding: 16px;
+}
+
+.dessert {
+    margin: 0;
+    padding: 16px;
+}
+
+.main {
+    display: none;
+}
+
+.dessert {
+    display: none;
+}
+
+#buttons {
+    display: none;
+}
+
+#menutitle {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.menu-select {
+    width: 75%;
+    background-color: #1C1C1C;
+    border: solid 3px white;
+    color: white;
+    padding: 8px;
+    display: block;
+    margin: auto;
+    font-size: 1.5rem;
+}
+
+#aboutbanner {
+    background-image: url("../../public/img/aboutbanner.jpg");
+    width: 100%;
+    height: 700px;
+    object-fit: fill;
+    background-position: 50% 70%;
+}
+
+footer h4 {
+    text-align: center;
+    font-size: 24px;
+    line-height: 1;
+}
+
+footer form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.submitButton {
+    background-color: #D60000;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    padding: 6px 10px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+    width: 60%;
+}
+
+.inputField {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    color: rgb(0, 0, 0);
+    padding: 6px 10px;
+    text-decoration: none;
+    margin: 4px 2px;
+    width: 60%;
+}
+
+#newsletter h4 img {
+    width: 40px;
+    position: relative;
+    top: 12px;
+}
+
+#media-icons {
+    position: relative;
+    left: -20px;
+    display: flex;
+    margin: 0;
+    justify-content: space-evenly
+}
+
+#media-icons img {
+    width: 45px;
+}
+
+#comments * {
+    text-align: center;
+}
+
+.mobileNavigation {
+    background-color: white;
+    width: 400px;
+    height: 100%;
+    position: fixed;
+    z-index: 2;
+    display: flex;
+    flex-direction: column
+}
+
+.mobilenavbuttons {
+    font-size: 2rem;
+    margin-left: 5%;
+    margin-top: 20px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#contact img {
+    position: relative;
+    top: 8px;
+}
+.address{
+    width:80%;
+}
+.star-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    left:-24px;
+}
+
+.star-container img {
+    width: 32px;
+}
+
+@media only screen and (min-width: 992px) {
+    #buttons {
+        display: flex;
+        width: 75%;
+        margin: 0 auto;
+        border-radius: 25px;
+    }
+
+    #buttons a {
+        text-decoration: none;
+        color: white;
+        width: 100%;
+        height: 75px;
+        line-height: 2.6;
+        font-size: 1.6rem;
+        background-color: white;
+        color: black;
+        border: #D60000 solid 6px;
+        text-align: center;
+    }
+
+    #buttons #appetizer {
+        border-radius: 25px 0px 0px 25px;
+        background-color: #D60000;
+    }
+
+    #buttons #dessert {
+        border-radius: 0px 25px 25px 0px;
+    }
+
+    .menu-select {
+        display: none;
+    }
+
+    .mobilenav {
+        display: none;
+    }
+
+    .desktopnav {
+        display: block;
+        text-decoration: none;
+        color: white;
+        font-size: 1.5rem;
+    }
+    footer{
+        height: 320px;
+        grid-template-columns: repeat(3, 1fr);
+        grid-auto-rows: 1fr;
+        gap: 10px;
+    }
+    #contact {
+        grid-column-start: 3;
+        grid-row-start: 1;
+    }
+    
+    #newsletter {
+        grid-column-start: 1;
+        grid-row-start: 1;
+    }
+    
+    #comments {
+        grid-column-start: 2;
+        grid-row-start: 1;
+    }
+}
