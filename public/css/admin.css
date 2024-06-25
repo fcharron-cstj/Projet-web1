@@ -1,0 +1,42 @@
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+input,
+select,
+textarea,
+button {
+    font-family: "Basic", sans-serif;
+}
+
+body {
+    background-color: #1C1C1C;
+    color: white;
+    margin: 0;
+    font-family: "Basic", sans-serif;
+}
+header{
+    background-color: #000000;
+    color: white;
+    height: 130px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.navigation{
+    width: 80%;
+    display:flex;
+    justify-content: space-evenly;
+}
+.navigation a{
+    text-decoration: underline;
+    color:white;
+}
+.content{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

@@ -93,13 +93,14 @@
         </section>
         <section id="newsletter">
             <h4>Abonnez-vous à notre infolettre! <img src="public/img/mail.svg" alt=""></h4>
-            <form action="newsletter-subscribe">
-                <input type="text" name="first-name" placeholder="Prénom" class="inputField">
-                <input type="text" name="last-name" placeholder="Nom de famille" class="inputField">
-                <input type="text" name="email" placeholder="Courriel" class="inputField">
+            <form action="newsletter-subscribe" method="post">
+                <input type="text" name="first_name" placeholder="Prénom" class="inputField">
+                <input type="text" name="last_name" placeholder="Nom de famille" class="inputField">
+                <input type="email" name="email" placeholder="Courriel" class="inputField">
                 <input type="submit" class="submitButton">
             </form>
         </section>
     </footer>
 </div>
+<script src="public/js/main.js"></script>
 <?php include ("views/components/foot.php") ?>

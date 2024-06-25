@@ -96,4 +96,5 @@
         <img src="" alt="">
     </section>
 </footer>
+<script src="public/js/main.js"></script>
 <?php include ("views/components/foot.php") ?>
