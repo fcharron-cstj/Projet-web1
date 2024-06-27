@@ -2,8 +2,9 @@
 <header>
     <h1>Admin panel</h1>
     <ul class="navigation">
+        <a href="admin-panel">Menu list</a>
         <a href="content-menu-add">Add a menu item</a>
-        <a href="content-category-add">Add a new category</a>
+        <a href="content-category-list">Manage menu sections</a>
         <a href="account-list">Manage users</a>
         <a href="account-disconnect">Log out</a>
         <a href="index">Return home</a>
@@ -37,13 +38,18 @@
                 <input type="number" name="price" placeholder="price" min="1" step="any" />
                 <label>
                     <p>Picture</p>
-                    <input type="file" name="media">
+                    <input type="file" name="image">
                 </label>
                 <input type="submit" value="Submit" class="btn submit">
-                <?php foreach ($categories as $category) : ?>
-                <input type="checkbox" id="<?=$category->id?>" name="category" value="<?=$category->id?>">
-                <label for="<?=$category->id?>"><?=$category->title?></label><br>
-                <?php endforeach;?>
+                <?php foreach ($categories as $category): ?>
+                    <input type="checkbox" name="categories[]" value="<?= $category->id ?>">
+                    <label for="<?= $category->id ?>"><?= $category->title ?></label><br>
+                <?php endforeach; ?>
+                <select name="section" id="">
+                    <option value="1">Entrée</option>
+                    <option value="2">Repas</option>
+                    <option value="3">Dessert</option>
+                </select>
             </form>
         </section>
     </div>

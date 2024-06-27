@@ -50,5 +50,31 @@ class User extends Model
         return $request->fetch();
     }
 
+    public function getRole($id)
+    {
+        $sql = "SELECT role
+                FROM $this->table
+                WHERE id = :id";
+        
+        $request = $this->pdo()->prepare($sql);
+        
+        $request->execute([
+            ":id"=> $id
+            ]);
 
+        return $request->fetch();
+    }
+
+    public function deleteAccount($id)
+    {
+        $sql = "DELETE FROM $this->table
+        WHERE id = :id";
+
+
+        $requete = $this->pdo()->prepare($sql);
+
+        return $requete->execute([
+            ":id" => $id,
+        ]);
+    }
 }

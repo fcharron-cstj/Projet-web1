@@ -10,7 +10,7 @@ class SiteController extends Controller
 
     public function menu()
     {
-        $this->view("menu", ["dishes" => (new Dish)->everyDish()]);
+        $this->view("menu", ["dishes" => (new Dish)->getEveryDish()]);
     }
     public function aboutUs()
     {

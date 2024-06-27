@@ -25,24 +25,14 @@ class UserController extends Controller
     }
 
     /**
-     * Displays the register form
-     *
-     * @return void
-     */
-    public function create()
-    {
-        $this->view("admin/register");
-    }
-
-    /**
      * Displays the admin panel
      *
      * @return void
      */
     public function admin()
     {
-
-        $this->view("admin/admin", ["dishes" => (new Dish)->everyDish()]);
+        $this->protectRoute();
+        $this->view("admin/admin", ["dishes" => (new Dish)->getEveryDish()]);
     }
 
     /**
@@ -52,6 +42,7 @@ class UserController extends Controller
      */
     public function addMenuItem()
     {
+        $this->protectRoute();
         $this->view("admin/menu.add", ["categories" => (new Category)->getCategories()]);
     }
 
@@ -60,8 +51,18 @@ class UserController extends Controller
      *
      * @return void
      */
-    public function store()
+    public function storeAccount()
     {
+        $this->protectRoute();
+
+        //Checks for access level
+        $user_model = new User;
+        $role = $user_model->getRole($_SESSION["user_id"]);
+
+        if ($role->role != 1) {
+            $this->redirect("admin-panel?access_denied");
+        }
+
         // Checks for credentials
         if (
             empty($_POST["username"]) ||
@@ -69,7 +70,7 @@ class UserController extends Controller
             empty($_POST["password"]) ||
             empty($_POST["password_confirmation"])
         ) {
-            $this->redirect("account-register?missing_info");
+            $this->redirect("account-list?missing_info");
         }
 
         // Confirms password
@@ -137,12 +138,13 @@ class UserController extends Controller
      */
     public function storeMenuItem()
     {
-        // Checks for credentials
+        $this->protectRoute();
+        // Checks information
         if (
             empty($_POST["title"]) ||
             empty($_POST["description"]) ||
             empty($_POST["price"]) ||
-            empty($_POST["image"]) ||
+            empty($_FILES["image"]) ||
             empty($_POST["categories"]) ||
             empty($_POST["section"])
         ) {
@@ -158,11 +160,11 @@ class UserController extends Controller
 
         // Stores the information
         $dish_model = new Dish;
-        $success = $dish_model->addMenuItem(
+        $success = $dish_model->storeMenuItem(
             $_POST["title"],
             $_POST["description"],
-            $_POST["price"],
             $image,
+            $_POST["price"],
             $_POST["section"],
         );
 
@@ -170,23 +172,223 @@ class UserController extends Controller
             $this->redirect("content-menu-add?error");
         }
 
-        $success = $dish_model->addMenuCategories(
-           $_POST["categories"],
-        );
+        foreach ($_POST["categories"] as $category) {
+            $success = $dish_model->addMenuCategories($category);
+            if (!$success) {
+                $this->redirect("content-menu-add?error");
+            }
+        }
 
 
         $this->redirect("content-menu-add?register_success");
     }
 
-    public function addCategory()
+    public function showMenuItem()
     {
+        $this->protectRoute();
+        $dish = (new Dish)->getDishFromId($_GET["id"]);
+        $dish->categories = explode(",", $dish->categories);
+        $this->view("admin/modify", ["dish" => $dish, "categories" => (new Category)->getCategories()]);
+    }
+
+    public function modifyMenuItem()
+    {
+        $this->protectRoute();
+        if (empty($_POST["id"])) {
+            $this->redirect("admin-panel?error");
+        }
+
+        // Checks information
+        if (
+            empty($_POST["title"]) ||
+            empty($_POST["description"]) ||
+            empty($_POST["price"]) ||
+            empty($_FILES["image"]) ||
+            empty($_POST["categories"]) ||
+            empty($_POST["section"])
+        ) {
+
+            $this->redirect("content-menu-show?id=" . $_POST['id'] . "?missing_info");
+        }
+
+        // Stores the image
+        $image = null;
+        if (!empty($_FILES["image"])) {
+            $upload = new Upload("image");
+            $image = $upload->InsertInto("uploads");
+        }
+
+        // Stores the information
+        $dish_model = new Dish;
+        $success = $dish_model->modifyMenuItem(
+            $_POST["id"],
+            $_POST["title"],
+            $_POST["description"],
+            $image,
+            $_POST["price"],
+            $_POST["section"],
+        );
+        if (!$success) {
+            $this->redirect("content-menu-show?id=" . $_POST['id'] . "?error");
+        }
+
+        $success = $dish_model->deleteMenuItemCategories($_POST["id"]);
+        if (!$success) {
+            $this->redirect("content-menu-show?id=" . $_POST['id'] . "?error");
+        }
+
+
+        foreach ($_POST["categories"] as $category) {
+            $success = $dish_model->addMenuCategories($category, $_POST["id"]);
+            if (!$success) {
+                $this->redirect("content-menu-show?id=" . $_POST['id'] . "?error");
+            }
+        }
+
+        $this->redirect("admin-panel?register_success");
+    }
+
+
+
+    public function accountIndex()
+    {
+        $this->protectRoute();
+
+        //Checks for access level
+        $user_model = new User;
+        $role = $user_model->getRole($_SESSION["user_id"]);
+
+        if ($role->role != 1) {
+            $this->redirect("admin-panel?access_denied");
+        }
+        $this->view("admin/account.index", ["users" => (new User)->tout()]);
+    }
+
+    public function deleteAccount()
+    {
+        $this->protectRoute();
+
+        //Checks for access level
+        $user_model = new User;
+        $role = $user_model->getRole($_GET["id"]);
+
+        if ($role->role == 1) {
+            $this->redirect("admin-panel?error");
+        }
+        $user_model = new User;
+        $success = $user_model->deleteAccount($_GET["id"]);
+
+        if (!$success) {
+            $this->redirect("account-list?error");
+        }
+
+        $this->redirect("account-list?delete-success");
 
     }
 
-    public function accountDelete()
+    public function categoryIndex()
     {
+        $this->protectRoute();
+
+        //Checks for access level
+        $user_model = new User;
+        $role = $user_model->getRole($_SESSION["user_id"]);
+
+        if ($role->role != 1) {
+            $this->redirect("admin-panel?access_denied");
+        }
+        $this->view("admin/sections.index", ["sections" => (new Category)->getSections()]);
 
     }
 
+    public function storeSection()
+    {
+        $this->protectRoute();
 
+        //Checks for access level
+        $user_model = new User;
+        $role = $user_model->getRole($_SESSION["user_id"]);
+
+        if ($role->role != 1) {
+            $this->redirect("admin-panel?access_denied");
+        }
+        if (
+            empty($_POST["title"])
+        ) {
+            $this->redirect("content-category-list?missing_info");
+        }
+
+        // Stores the information
+        $category_model = new Category;
+        $success = $category_model->storeSection(
+            $_POST["title"],
+        );
+
+        if (!$success) {
+            $this->redirect("content-category-list?error");
+        }
+
+        $this->redirect("content-category-list?add_success");
+    }
+
+    public function deleteSection()
+    {
+        $this->protectRoute();
+
+        //Checks for access level
+        $user_model = new User;
+        $role = $user_model->getRole($_SESSION["user_id"]);
+
+        if ($role->role != 1) {
+            $this->redirect("admin-panel?access_denied");
+        }
+        $category_model = new Category;
+        $success = $category_model->deleteSection($_GET["id"]);
+
+        if (!$success) {
+            $this->redirect("content-category-list?error");
+        }
+
+        $this->redirect("content-category-list?delete-success");
+    }
+
+    public function modifySection()
+    {
+        var_dump($_POST);
+        exit();
+
+        $this->protectRoute();
+
+         //Checks for access level
+         $user_model = new User;
+         $role = $user_model->getRole($_SESSION["user_id"]);
+ 
+         if ($role->role != 1) {
+             $this->redirect("admin-panel?access_denied");
+         }
+
+        if (empty($_POST["id"])) {
+            $this->redirect("admin-panel?error");
+        }
+
+        // Checks information
+        if (
+            empty($_POST["title"])
+        ) {
+
+            $this->redirect("content-category-list?missing_info");
+        }
+
+        // Stores the information
+        $dish_model = new Category;
+        $success = $dish_model->modifySection(
+            $_POST["id"],
+            $_POST["title"],
+        );
+        if (!$success) {
+            $this->redirect("content-category-list?error");
+        }
+
+        $this->redirect("content-category-list?register_success");
+    }
 }

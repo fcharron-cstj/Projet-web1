@@ -4,7 +4,7 @@
             "Bases\\": "bases/",
             "Controllers\\": "controllers/",
             "Models\\": "models/",
-            "utils\\": "utils"
+            "Utils\\": "utils"
         }
     }
 }

@@ -2,8 +2,9 @@
 <header>
     <h1>Admin panel</h1>
     <ul class="navigation">
+        <a href="admin-panel">Menu list</a>
         <a href="content-menu-add">Add a menu item</a>
-        <a href="content-category-add">Add a new category</a>
+        <a href="content-category-list">Manage menu sections</a>
         <a href="account-list">Manage users</a>
         <a href="account-disconnect">Log out</a>
         <a href="index">Return home</a>
@@ -21,7 +22,7 @@
                         <p><?= $dish->price ?> $</p>
                         <img src="" alt="">
                     </div>
-                    <a href="content-menu-modify?<?=$dish->id?>" class="edit">Modify</a>
+                    <a href="content-menu-show?id=<?= $dish->id ?>" class="edit">Modify</a>
                 <?php endif; endforeach; ?>
         </ul>
         <ul class="main">
@@ -33,7 +34,7 @@
                         <p><?= $dish->price ?> $</p>
                         <img src="" alt="">
                     </div>
-                    <a href="content-menu-modify?<?=$dish->id?>" class="edit">Modify</a>
+                    <a href="content-menu-show?id=<?= $dish->id ?>" class="edit">Modify</a>
                 <?php endif; endforeach; ?>
         </ul>
         <ul class="dessert">
@@ -45,7 +46,7 @@
                         <p><?= $dish->price ?> $</p>
                         <img src="" alt="">
                     </div>
-                    <a href="content-menu-modify?<?=$dish->id?>" class="edit">Modify</a>
+                    <a href="content-menu-show?id=<?= $dish->id ?>" class="edit">Modify</a>
                 <?php endif; endforeach; ?>
         </ul>
     </div>
