@@ -32,7 +32,7 @@ class UserController extends Controller
     public function admin()
     {
         $this->protectRoute();
-        $this->view("admin/admin", ["dishes" => (new Dish)->getEveryDish()]);
+        $this->view("admin/admin", ["dishes" => (new Dish)->getEveryDish(),"sections" => (new Category)->getSections()]);
     }
 
     /**
@@ -43,7 +43,7 @@ class UserController extends Controller
     public function addMenuItem()
     {
         $this->protectRoute();
-        $this->view("admin/menu.add", ["categories" => (new Category)->getCategories()]);
+        $this->view("admin/menu.add", ["categories" => (new Category)->getCategories(), "sections" => (new Category)->getSections()]);
     }
 
     /**
@@ -180,7 +180,7 @@ class UserController extends Controller
         }
 
 
-        $this->redirect("content-menu-add?register_success");
+        $this->redirect("admin-panel?add_success");
     }
 
     public function showMenuItem()
@@ -188,11 +188,12 @@ class UserController extends Controller
         $this->protectRoute();
         $dish = (new Dish)->getDishFromId($_GET["id"]);
         $dish->categories = explode(",", $dish->categories);
-        $this->view("admin/modify", ["dish" => $dish, "categories" => (new Category)->getCategories()]);
+        $this->view("admin/modify", ["dish" => $dish, "categories" => (new Category)->getCategories(),"sections" => (new Category)->getSections()]);
     }
 
     public function modifyMenuItem()
     {
+
         $this->protectRoute();
         if (empty($_POST["id"])) {
             $this->redirect("admin-panel?error");
@@ -245,7 +246,7 @@ class UserController extends Controller
             }
         }
 
-        $this->redirect("admin-panel?register_success");
+        $this->redirect("admin-panel?modify_success");
     }
 
 
@@ -349,13 +350,11 @@ class UserController extends Controller
             $this->redirect("content-category-list?error");
         }
 
-        $this->redirect("content-category-list?delete-success");
+        $this->redirect("content-category-list?delete_success");
     }
 
     public function modifySection()
     {
-        var_dump($_POST);
-        exit();
 
         $this->protectRoute();
 
@@ -389,6 +388,19 @@ class UserController extends Controller
             $this->redirect("content-category-list?error");
         }
 
-        $this->redirect("content-category-list?register_success");
+        $this->redirect("content-category-list?success");
+    }
+    public function deleteMenuItem()
+    {
+        $this->protectRoute();
+
+        $dish_model = new Dish;
+        $success = $dish_model->deleteDish($_GET["id"]);
+
+        if (!$success) {
+            $this->redirect("admin-panel?error");
+        }
+
+        $this->redirect("admin-panel?delete_success");
     }
 }

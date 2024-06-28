@@ -1,4 +1,5 @@
 <?php include ("views/components/adminhead.php") ?>
+
 <header>
     <h1>Admin panel</h1>
     <ul class="navigation">
@@ -15,22 +16,6 @@
     <div class="container">
         <h1>Add a new menu item</h1>
         <section class="form">
-            <!-- Messages -->
-            <?php if (isset($_GET["register_success"])): ?>
-                <p class="success">
-                    Your account was created successfully
-                </p>
-            <?php endif; ?>
-            <?php if (isset($_GET["information_missing"])): ?>
-                <p class="error">
-                    Information is missing
-                </p>
-            <?php endif; ?>
-            <?php if (isset($_GET["information_invalid"])): ?>
-                <p class="error">
-                    Information is invalid
-                </p>
-            <?php endif; ?>
 
             <form action="content-menu-store" method="POST" enctype="multipart/form-data">
                 <input type="text" name="title" placeholder="title" autofocus>
@@ -45,10 +30,12 @@
                     <input type="checkbox" name="categories[]" value="<?= $category->id ?>">
                     <label for="<?= $category->id ?>"><?= $category->title ?></label><br>
                 <?php endforeach; ?>
-                <select name="section" id="">
-                    <option value="1">Entrée</option>
-                    <option value="2">Repas</option>
-                    <option value="3">Dessert</option>
+                <select name="section">
+                <?php foreach ($sections as $section): ?>
+                    <option value="<?=$section->id?>"><?=$section->title?></option>
+                <?php endforeach; ?>
+                    
+
                 </select>
             </form>
         </section>

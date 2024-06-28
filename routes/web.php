@@ -18,6 +18,7 @@ $routes = [
     "content-menu-store" => ["UserController","storeMenuItem"],
     "content-menu-show" => ["UserController","showMenuItem"],
     "content-menu-modify" => ["UserController","modifyMenuItem"],
+    "content-menu-delete" => ["UserController","deleteMenuItem"],
     "content-category-list" => ["UserController","categoryIndex"],
     "content-category-add" => ["UserController","storeSection"],
     "content-category-modify" => ["UserController","modifySection"],

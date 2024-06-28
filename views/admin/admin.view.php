@@ -1,4 +1,5 @@
 <?php include ("views/components/adminhead.php") ?>
+
 <header>
     <h1>Admin panel</h1>
     <ul class="navigation">
@@ -12,10 +13,27 @@
     </ul>
 </header>
 <main>
-    <div class="content">
-        <ul class="appetizer">
-            <?php foreach ($dishes as $dish):
-                if ($dish->section_id == 1): ?>
+    <div class="dishes">
+        <?php foreach ($dishes as $dish):
+            foreach ($sections as $section):
+                if ($dish->section_id == $section->id): ?>
+                    <ul>
+                        <div class="dish">
+                            <h3><?= $dish->title ?></h3>
+                            <p><?= $dish->description ?></p>
+                            <p><?= $dish->price ?> $</p>
+                            <img src="" alt="">
+                        </div>
+                        <a href="content-menu-show?id=<?= $dish->id ?>" class="edit">Modify</a>
+                        <a href="content-menu-delete?id=<?= $dish->id ?>" class="delete">Delete</a>
+                    </ul>
+                <?php endif; endforeach; endforeach; ?>
+    </div>
+    <div class="otherdishes">
+        <span>Uncategorized</span>
+        <?php foreach ($dishes as $dish):
+            if ($dish->section_id == null): ?>
+                <ul>
                     <div class="dish">
                         <h3><?= $dish->title ?></h3>
                         <p><?= $dish->description ?></p>
@@ -23,32 +41,9 @@
                         <img src="" alt="">
                     </div>
                     <a href="content-menu-show?id=<?= $dish->id ?>" class="edit">Modify</a>
-                <?php endif; endforeach; ?>
-        </ul>
-        <ul class="main">
-            <?php foreach ($dishes as $dish):
-                if ($dish->section_id == 2): ?>
-                    <div class="dish">
-                        <h3><?= $dish->title ?></h3>
-                        <p><?= $dish->description ?></p>
-                        <p><?= $dish->price ?> $</p>
-                        <img src="" alt="">
-                    </div>
-                    <a href="content-menu-show?id=<?= $dish->id ?>" class="edit">Modify</a>
-                <?php endif; endforeach; ?>
-        </ul>
-        <ul class="dessert">
-            <?php foreach ($dishes as $dish):
-                if ($dish->section_id == 3): ?>
-                    <div class="dish">
-                        <h3><?= $dish->title ?></h3>
-                        <p><?= $dish->description ?></p>
-                        <p><?= $dish->price ?> $</p>
-                        <img src="" alt="">
-                    </div>
-                    <a href="content-menu-show?id=<?= $dish->id ?>" class="edit">Modify</a>
-                <?php endif; endforeach; ?>
-        </ul>
+                    <a href="content-menu-delete?id=<?= $dish->id ?>" class="delete">Delete</a>
+                </ul>
+            <?php endif; endforeach; ?>
     </div>
 </main>
 

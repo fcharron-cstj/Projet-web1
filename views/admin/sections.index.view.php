@@ -15,19 +15,22 @@
     <div class="container">
         <h1>Edit an existing section</h1>
         <section class="form">
-            <form action="content-category-modify" method="POST">
+
                 <?php foreach ($sections as $section): ?>
+                    <form action="content-category-modify" method="POST">
                     <span>Modifier Section <?= $section->title ?></span><br>
+                    <input type="hidden" name="id" id="hiddenField" value="<?= $section->id ?>" />
                     <input type="text" name="title" placeholder="title" value="<?= $section->title ?>" autofocus>
                     <br>
                     <img src="public/img/trash.svg" alt="">
                 <a href="content-category-remove?id=<?= $section->id?>">Supprimer</a>
                 <br>
-                <input type="submit" value="Modifier" name="<?=$section->id?>" class="btn submit">
+                <input type="submit" value="Modifier" class="btn submit">
                 <br>
+                </form>
                 <?php endforeach; ?>
 
-            </form>
+
         </section>
         <section>
             <h2>Add a new section</h2>

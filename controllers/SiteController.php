@@ -5,12 +5,13 @@ namespace Controllers;
 use Bases\Controller;
 use Models\Dish;
 use Models\Newsletter;
+use Models\Category;
 class SiteController extends Controller
 {
 
     public function menu()
     {
-        $this->view("menu", ["dishes" => (new Dish)->getEveryDish()]);
+        $this->view("menu", ["dishes" => (new Dish)->getEveryDish(),"sections" => (new Category)->getSections()]);
     }
     public function aboutUs()
     {

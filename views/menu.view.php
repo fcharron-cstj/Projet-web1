@@ -16,50 +16,30 @@
             <section>
                 <h2 id="menutitle">Notre menu</h2>
                 <select class="menu-select">
-                    <option value="appetizer">Entrées</option>
-                    <option value="main">Repas</option>
-                    <option value="dessert">Dessert</option>
+                    <option value="Entrée">Entrée</option>
+                    <option value="Repas">Repas</option>
+                    <option value="Dessert">Dessert</option>
                 </select>
                 <ul id="buttons">
-                    <a href="#" id="appetizer">Entrées</a>
+                    <a href="#" id="appetizer">Entrée</a>
                     <a href="#" id="main">Repas</a>
                     <a href="#" id="dessert">Dessert</a>
                 </ul>
             </section>
-            <ul class="appetizer">
-            <?php foreach ($dishes as $dish):
-                    if ($dish->section_id == 1): ?>
-                        <div class="dish">
-                            <h3><?= $dish->title ?></h3>
-                            <p><?= $dish->description ?></p>
-                            <p><?= $dish->price?> $</p>
-                            <img src="" alt="">
-                        </div>
-                    <?php endif; endforeach; ?>
-            </ul>
-            <ul class="main">
-            <?php foreach ($dishes as $dish):
-                    if ($dish->section_id == 2): ?>
-                        <div class="dish">
-                            <h3><?= $dish->title ?></h3>
-                            <p><?= $dish->description ?></p>
-                            <p><?= $dish->price?> $</p>
-                            <img src="" alt="">
-                        </div>
-                    <?php endif; endforeach; ?>
-            </ul>
-            <ul class="dessert">
-                <?php foreach ($dishes as $dish):
-                    if ($dish->section_id == 3): ?>
-                        <div class="dish">
-                            <h3><?= $dish->title ?></h3>
-                            <p><?= $dish->description ?></p>
-                            <p><?= $dish->price?> $</p>
-                            <img src="" alt="">
-                        </div>
-                    <?php endif; endforeach; ?>
-            </ul>
-        </div>
+            <div class="dishes">
+                <?php foreach ($sections as $section): ?>
+                    <ul class="<?=$section->title?>">
+                        <?php foreach ($dishes as $dish):
+                            if ($dish->section_id == $section->id): ?>
+                                <div>
+                                    <h3><?= $dish->title ?></h3>
+                                    <p><?= $dish->description ?></p>
+                                    <p><?= $dish->price ?> $</p>
+                                    <img src="" alt="">
+                                </div>
+                            <?php endif; endforeach; ?>
+                    </ul><?php endforeach; ?>
+            </div>
     </main>
     <footer>
 

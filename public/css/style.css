@@ -96,31 +96,14 @@ main {
     margin: 0 auto;
 }
 
-.appetizer {
+.dishes ul{
+    display: none;
     margin: 0;
     padding: 16px;
 }
 
-.main {
-    margin: 0;
-    padding: 16px;
-}
-
-.dessert {
-    margin: 0;
-    padding: 16px;
-}
-
-.main {
-    display: none;
-}
-
-.dessert {
-    display: none;
-}
-
-#buttons {
-    display: none;
+.dishes > :first-child{
+    display:block;
 }
 
 #menutitle {
@@ -202,6 +185,9 @@ footer form {
 
 #comments * {
     text-align: center;
+}
+#buttons{
+    display:none;
 }
 
 .mobileNavigation {

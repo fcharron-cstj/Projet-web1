@@ -1,4 +1,5 @@
 <?php include ("views/components/adminhead.php") ?>
+
 <header>
     <h1>Admin panel</h1>
     <ul class="navigation">
@@ -33,7 +34,7 @@
             <?php endif; ?>
 
             <form action="content-menu-modify" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="id" id="hiddenField" value="<?php echo $dish->id ?>" />
+                <input type="hidden" name="id" id="hiddenField" value="<?=$dish->id ?>" />
                 <input type="text" name="title" placeholder="title" value="<?= $dish->title ?>" autofocus>
                 <input type="textarea" name="description" placeholder="description" value="<?= $dish->description ?>"
                     autofocus>
@@ -51,16 +52,10 @@
                       } ?>>
                     <label for="<?= $category->id ?>"><?= $category->title ?></label>
                 <?php endforeach; ?>
-                <select name="section" id="">
-                    <option value="1" <?php if ($dish->section_id == 1) {
-                        echo "selected";
-                    } ?>>Entrée</option>
-                    <option value="2" <?php if ($dish->section_id == 2) {
-                        echo "selected";
-                    } ?>>Repas</option>
-                    <option value="3" <?php if ($dish->section_id == 3) {
-                        echo "selected";
-                    } ?>>Dessert</option>
+                <select name="section">
+                <?php foreach ($sections as $section): ?>
+                    <option value="<?=$section->id?>" <?php if($dish->section_id == $section->id){echo "selected";}?>><?=$section->title?></option>
+                <?php endforeach; ?>
                 </select>
                 <input type="submit" value="Submit" class="btn submit">
             </form>

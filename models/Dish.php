@@ -117,5 +117,16 @@ class Dish extends Model
         ]);
     }
 
+    public function deleteDish($id)
+    {
+        $sql = "DELETE FROM $this->table
+                WHERE id = :id";
 
+
+        $requete = $this->pdo()->prepare($sql);
+
+        return $requete->execute([
+            ":id" => $id,
+        ]);
+    }
 }

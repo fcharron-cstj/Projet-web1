@@ -59,7 +59,7 @@ class Category extends Model
 
     public function modifySection($id, $title)
     {
-        $sql = "UPDATE $this->table
+        $sql = "UPDATE sections
         SET title = :title
         WHERE id=:id";
 

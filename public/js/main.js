@@ -101,9 +101,10 @@ document.addEventListener("click", (e) => {
 //Fonction qui permet de changer de menu 
 
 function changeMenu(menu) {
-    document.querySelector(".appetizer").style.display = "none";
-    document.querySelector(".main").style.display = "none";
-    document.querySelector(".dessert").style.display = "none";
+    
+    document.querySelector(".Entrée").style.display = "none";
+    document.querySelector(".Repas").style.display = "none";
+    document.querySelector(".Dessert").style.display = "none";
     menu.style.display = "block";
 }
 
@@ -116,7 +117,7 @@ document.querySelectorAll("#buttons a").forEach((element) => {
         document.querySelector("#main").style.backgroundColor = "white";
         document.querySelector("#dessert").style.backgroundColor = "white";
         e.target.style.backgroundColor = "#D60000"
-        changeMenu(document.querySelector("." + e.target.id))
+        changeMenu(document.querySelector("." + e.target.innerHTML))
     })
 
 })
