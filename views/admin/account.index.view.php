@@ -13,8 +13,30 @@
 </header>
 <main>
     <div class="container">
-
         <section>
+             <!-- Messages -->
+             <div class="msg">
+            <?php if (isset($_GET["account_creation_fail"])) : ?>
+                <p class="error">
+                    An error occured
+                </p>
+            <?php endif; ?>
+            <?php if (isset($_GET["information_missing"])) : ?>
+                <p class="error">
+                    Required information is missing
+                </p>
+            <?php endif; ?>
+            <?php if (isset($_GET["password_not_matching"])) : ?>
+                <p class="error">
+                    The password must match the confirmation
+                </p>
+            <?php endif; ?>
+            <?php if (isset($_GET["register_success"])) : ?>
+                <p class="success">
+                    The account has been registered successfully
+                </p>
+            <?php endif; ?>
+            </div>
             <h2>List of users</h2>
             <?php foreach ($users as $user):
                 if ($user->role != 1): ?>
@@ -23,7 +45,7 @@
                     <span>Email :</span>
                     <p><?= $user->email ?></p>
                     <img src="public/img/trash.svg" alt="">
-                    <a href="account-delete?id=<?=$user->id?>">Delete this user</a>
+                    <a href="account-delete?id=<?=$user->id?>" class="delete">Delete this user</a>
                 <?php endif; endforeach; ?>
 
         </section>
@@ -40,4 +62,4 @@
         </section>
     </div>
 </main>
-<?php include ("views/components/foot.php") ?>
+<?php include ("views/components/adminfoot.php") ?>

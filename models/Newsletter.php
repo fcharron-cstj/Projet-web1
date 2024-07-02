@@ -7,11 +7,14 @@ use Bases\Model;
 class Newsletter extends Model{
     protected $table = "newsletter";
 
-    /**
-     * Stores first name, last name and email in the database
-     *
-     * @return bool
-     */
+  /**
+   * Stores user information in the database
+   *
+   * @param string $first_name
+   * @param string $last_name
+   * @param string $email
+   * @return bool
+   */
     public function store($first_name, $last_name, $email)
     {
         $sql = "INSERT INTO $this->table

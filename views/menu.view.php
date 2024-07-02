@@ -16,27 +16,34 @@
             <section>
                 <h2 id="menutitle">Notre menu</h2>
                 <select class="menu-select">
-                    <option value="Entrée">Entrée</option>
-                    <option value="Repas">Repas</option>
-                    <option value="Dessert">Dessert</option>
+
+                    <?php foreach ($sections as $section): ?>
+                        <option value="<?=$section->title?>"><?=$section->title?></option>
+                    <?php endforeach; ?>
                 </select>
                 <ul id="buttons">
-                    <a href="#" id="appetizer">Entrée</a>
-                    <a href="#" id="main">Repas</a>
-                    <a href="#" id="dessert">Dessert</a>
+                    <?php foreach ($sections as $section): ?>
+                        <a href="#"><?=$section->title?></a>
+                    <?php endforeach; ?>
                 </ul>
             </section>
             <div class="dishes">
                 <?php foreach ($sections as $section): ?>
-                    <ul class="<?=$section->title?>">
+                    <ul class="<?= $section->title ?>">
                         <?php foreach ($dishes as $dish):
                             if ($dish->section_id == $section->id): ?>
-                                <div>
-                                    <h3><?= $dish->title ?></h3>
-                                    <p><?= $dish->description ?></p>
-                                    <p><?= $dish->price ?> $</p>
-                                    <img src="" alt="">
+                                <div class="dish">
+                                    <div>
+                                        <h3><?= $dish->title ?></h3>
+                                        <p><?= $dish->price ?> $</p>
+                                    </div>
+
+                                    <div>
+                                        <p><?= $dish->description ?></p>
+                                        <img src="<?= $dish->image ?>" class="thumbnail">
+                                    </div>
                                 </div>
+                                <hr>
                             <?php endif; endforeach; ?>
                     </ul><?php endforeach; ?>
             </div>
@@ -72,6 +79,21 @@
             </ul>
         </section>
         <section id="newsletter">
+            <?php if (isset($_GET["newsletter_success"])): ?>
+                <p class="success">
+                    Merci !
+                </p>
+            <?php endif; ?>
+            <?php if (isset($_GET["newsletter_error"])): ?>
+                <p class="error">
+                    An error occured
+                </p>
+            <?php endif; ?>
+            <?php if (isset($_GET["newsletter_missing"])): ?>
+                <p class="error">
+                    Required information is missing
+                </p>
+            <?php endif; ?>
             <h4>Abonnez-vous à notre infolettre! <img src="public/img/mail.svg" alt=""></h4>
             <form action="newsletter-subscribe" method="post">
                 <input type="text" name="first_name" placeholder="Prénom" class="inputField">
@@ -82,5 +104,5 @@
         </section>
     </footer>
 </div>
-<script src="public/js/main.js"></script>
+<script src="public/js/menu.js"></script>
 <?php include ("views/components/foot.php") ?>

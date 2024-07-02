@@ -29,11 +29,12 @@ class User extends Model
             ":password" => $password,
         ]);
     }
+
     /**
      * Returns the information of a user using a given email
      *
      * @param string $email
-     * @return object|false
+     * @return object
      */
     public function getUserEmail($email)
     {
@@ -50,6 +51,12 @@ class User extends Model
         return $request->fetch();
     }
 
+    /**
+     * Returns the role of a user using a given id
+     *
+     * @param int $id
+     * @return object
+     */
     public function getRole($id)
     {
         $sql = "SELECT role
@@ -65,6 +72,12 @@ class User extends Model
         return $request->fetch();
     }
 
+    /**
+     * Deletes an account from the database using a given id
+     *
+     * @param int $id
+     * @return bool
+     */
     public function deleteAccount($id)
     {
         $sql = "DELETE FROM $this->table

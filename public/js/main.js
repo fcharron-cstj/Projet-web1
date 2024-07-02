@@ -1,8 +1,6 @@
 
-//Navigation pour mobile
 
 //Commentaires
-
 let comments = [
     ["Excellent service et de la nourriture absolument délicieuse!", 5],
     ["Pub G6 est ma destination favorite lorsque je veux recevoir des invités. Fiables et toujours une ambiance très agréable.", 5],
@@ -48,6 +46,8 @@ function addStar(totalStars, fullstars, halfstar, starcontainer) {
     addStar(totalStars, fullstars, halfstar, starcontainer)
 
 }
+
+//Navigation pour mobile
 
 function openNav() {
     const dark = document.querySelector(".container")
@@ -97,34 +97,3 @@ document.addEventListener("click", (e) => {
     }
 
 })
-
-//Fonction qui permet de changer de menu 
-
-function changeMenu(menu) {
-    
-    document.querySelector(".Entrée").style.display = "none";
-    document.querySelector(".Repas").style.display = "none";
-    document.querySelector(".Dessert").style.display = "none";
-    menu.style.display = "block";
-}
-
-// Changement du menu pour desktop
-
-document.querySelectorAll("#buttons a").forEach((element) => {
-    element.addEventListener("click", (e) => {
-        e.preventDefault();
-        document.querySelector("#appetizer").style.backgroundColor = "white";
-        document.querySelector("#main").style.backgroundColor = "white";
-        document.querySelector("#dessert").style.backgroundColor = "white";
-        e.target.style.backgroundColor = "#D60000"
-        changeMenu(document.querySelector("." + e.target.innerHTML))
-    })
-
-})
-
-// Changement du menu pour mobile
-
-let select = document.querySelector(".menu-select");
-select.onchange = (e) => {
-    changeMenu(document.querySelector("." + e.target.value))
-}

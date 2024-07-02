@@ -5,30 +5,30 @@
         <h1 class="logo">Log in</h1>
         <section class="login">
             <!-- Messages -->
-            <?php if (isset($_GET["register_success"])) : ?>
+            <div class="msg">
+            <?php if (isset($_GET["disconnected"])) : ?>
                 <p class="success">
-                    Your account was created successfully
+                    You have been disconnected
                 </p>
             <?php endif; ?>
             <?php if (isset($_GET["information_missing"])) : ?>
                 <p class="error">
-                    Information is missing
+                    Required information is missing
                 </p>
             <?php endif; ?>
             <?php if (isset($_GET["information_invalid"])) : ?>
                 <p class="error">
-                    Information is invalid
+                    The account details are incorrect
                 </p>
             <?php endif; ?>
-
+            </div>
             <form action="account-connect" method="POST">
                 <input type="text" name="email" placeholder="Email" autofocus>
                 <input type="password" name="password" placeholder="Password">
                 <input type="submit" value="Log in" class="btn submit">
             </form>
         </section>
-        <a href="index" class="button">Return home</a>
+        <a href="index" class="return">Return home</a>
     </div>
 </main>
-
-<?php include("views/components/foot.php") ?>
+<?php include("views/components/adminfoot.php") ?>

@@ -15,20 +15,44 @@
     <div class="container">
         <h1>Edit an existing section</h1>
         <section class="form">
-
-                <?php foreach ($sections as $section): ?>
-                    <form action="content-category-modify" method="POST">
+            <!-- Messages -->
+            <?php if (isset($_GET["missing_info"])): ?>
+                <p class="error">
+                    Information is missing
+                </p>
+            <?php endif; ?>
+            <?php if (isset($_GET["error"])): ?>
+                <p class="error">
+                    An error occured
+                </p>
+            <?php endif; ?>
+            <?php if (isset($_GET["add_success"])): ?>
+                <p class="success">
+                    A section was added successfully
+                </p>
+            <?php endif; ?>
+            <?php if (isset($_GET["edit_success"])): ?>
+                <p class="success">
+                    A section was edited successfully
+                </p>
+            <?php endif; ?>
+            <?php foreach ($sections as $section): ?>
+                <form action="content-category-modify" method="POST">
                     <span>Modifier Section <?= $section->title ?></span><br>
                     <input type="hidden" name="id" id="hiddenField" value="<?= $section->id ?>" />
                     <input type="text" name="title" placeholder="title" value="<?= $section->title ?>" autofocus>
                     <br>
-                    <img src="public/img/trash.svg" alt="">
-                <a href="content-category-remove?id=<?= $section->id?>">Supprimer</a>
-                <br>
-                <input type="submit" value="Modifier" class="btn submit">
-                <br>
+                    <input type="submit" value="Modifier" class="btn submit">
+                    <div class="buttons">
+                        <a href="content-category-remove?id=<?= $section->id ?>" class="delete">Supprimer</a>
+                        <img src="public/img/trash.svg" alt="">
+                    </div>
+
+                    <br>
+
+                    <br>
                 </form>
-                <?php endforeach; ?>
+            <?php endforeach; ?>
 
 
         </section>
@@ -41,7 +65,6 @@
 
                 <input type="submit" value="Submit" class="btn submit">
             </form>
-            <a href="admin-panel">Return</a>
         </section>
 </main>
-<?php include ("views/components/foot.php") ?>
+<?php include ("views/components/adminfoot.php") ?>

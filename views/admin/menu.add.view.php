@@ -16,6 +16,17 @@
     <div class="container">
         <h1>Add a new menu item</h1>
         <section class="form">
+            <!-- Messages -->
+            <?php if (isset($_GET["error"])): ?>
+                <p class="error">
+                    An error occured
+                </p>
+            <?php endif; ?>
+            <?php if (isset($_GET["missing_info"])): ?>
+                <p class="error">
+                    Information is missing
+                </p>
+            <?php endif; ?>
 
             <form action="content-menu-store" method="POST" enctype="multipart/form-data">
                 <input type="text" name="title" placeholder="title" autofocus>
@@ -31,14 +42,14 @@
                     <label for="<?= $category->id ?>"><?= $category->title ?></label><br>
                 <?php endforeach; ?>
                 <select name="section">
-                <?php foreach ($sections as $section): ?>
-                    <option value="<?=$section->id?>"><?=$section->title?></option>
-                <?php endforeach; ?>
-                    
+                    <?php foreach ($sections as $section): ?>
+                        <option value="<?= $section->id ?>"><?= $section->title ?></option>
+                    <?php endforeach; ?>
+
 
                 </select>
             </form>
         </section>
     </div>
 </main>
-<?php include ("views/components/foot.php") ?>
+<?php include ("views/components/adminfoot.php") ?>

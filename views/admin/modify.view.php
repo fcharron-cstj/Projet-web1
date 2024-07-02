@@ -17,19 +17,14 @@
         <h1>Edit an existing menu item</h1>
         <section class="form">
             <!-- Messages -->
-            <?php if (isset($_GET["register_success"])): ?>
-                <p class="success">
-                    Your account was created successfully
-                </p>
-            <?php endif; ?>
-            <?php if (isset($_GET["information_missing"])): ?>
+            <?php if (isset($_GET["missing_info"])): ?>
                 <p class="error">
                     Information is missing
                 </p>
             <?php endif; ?>
-            <?php if (isset($_GET["information_invalid"])): ?>
+            <?php if (isset($_GET["error"])): ?>
                 <p class="error">
-                    Information is invalid
+                    An error occured
                 </p>
             <?php endif; ?>
 
@@ -62,4 +57,4 @@
             <a href="admin-panel">Return</a>
         </section>
 </main>
-<?php include ("views/components/foot.php") ?>
+<?php include ("views/components/adminfoot.php") ?>

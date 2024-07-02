@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Basic&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/cadriciel_pwa/node_modules/sweetalert2/dist/sweetalert2.css">
     <link rel="shortcut icon" href="#">
 </head>
 

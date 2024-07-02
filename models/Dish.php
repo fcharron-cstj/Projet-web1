@@ -15,7 +15,7 @@ class Dish extends Model
      */
     public function getEveryDish()
     {
-        $sql = "SELECT DISTINCT $this->table.id, $this->table.title, $this->table.description, $this->table.price, $this->table.section_id 
+        $sql = "SELECT DISTINCT $this->table.id, $this->table.title, $this->table.description, $this->table.price, $this->table.section_id, $this->table.image 
                 FROM $this->table
                 JOIN dish_category
                     ON $this->table.id = dish_category.dish_id
@@ -30,6 +30,17 @@ class Dish extends Model
 
         return $requete->fetchAll();
     }
+
+    /**
+     * Stores a menu item in the database
+     *
+     * @param string $title
+     * @param string $description
+     * @param string $image
+     * @param string $price
+     * @param int $section
+     * @return bool
+     */
     public function storeMenuItem($title, $description, $image, $price, $section)
     {
         $sql = "INSERT INTO $this->table
@@ -48,6 +59,14 @@ class Dish extends Model
         ]);
     }
 
+    /**
+     * Stores a menu item category in the database
+     * If no menu item is given, last id will be used instead
+     *
+     * @param int $category_id
+     * @param int $dish_id
+     * @return bool
+     */
     public function addMenuCategories($category_id, $dish_id = null)
     {
         if ($dish_id == null) {
@@ -66,6 +85,13 @@ class Dish extends Model
 
         ]);
     }
+
+    /**
+     * Returns a dish from a given id
+     *
+     * @param int $id
+     * @return object
+     */
     public function getDishFromId($id)
     {
         $sql = "SELECT DISTINCT $this->table.id, $this->table.title, $this->table.description, $this->table.price, $this->table.section_id, GROUP_CONCAT(dish_category.category_id) as categories 
@@ -86,6 +112,17 @@ class Dish extends Model
         return $requete->fetch();
     }
 
+    /**
+     * Modifies an item in the database
+     *
+     * @param int $id
+     * @param string $title
+     * @param string $description
+     * @param string $image
+     * @param string $price
+     * @param int $section
+     * @return bool
+     */
     public function modifyMenuItem($id, $title, $description, $image, $price, $section)
     {
         $sql = "UPDATE $this->table
@@ -104,6 +141,12 @@ class Dish extends Model
         ]);
     }
 
+    /**
+     * Deletes a menu item category using a given id
+     *
+     * @param int $id
+     * @return bool
+     */
     public function deleteMenuItemCategories($id)
     {
         $sql = "DELETE FROM dish_category
@@ -117,6 +160,12 @@ class Dish extends Model
         ]);
     }
 
+    /**
+     * Deletes a menu item using a given id
+     *
+     * @param int $id
+     * @return bool
+     */
     public function deleteDish($id)
     {
         $sql = "DELETE FROM $this->table

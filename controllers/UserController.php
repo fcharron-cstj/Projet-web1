@@ -25,7 +25,7 @@ class UserController extends Controller
     }
 
     /**
-     * Displays the admin panel
+     * Displays the admin panel with information about dishes and sections for displaying purposes
      *
      * @return void
      */
@@ -36,7 +36,7 @@ class UserController extends Controller
     }
 
     /**
-     * Displays the admin panel
+     * Displays the form to add a new menu item with information about categories and sections for displaying purposes
      *
      * @return void
      */
@@ -70,12 +70,12 @@ class UserController extends Controller
             empty($_POST["password"]) ||
             empty($_POST["password_confirmation"])
         ) {
-            $this->redirect("account-list?missing_info");
+            $this->redirect("account-list?information_missing");
         }
 
         // Confirms password
         if ($_POST["password"] != $_POST["password_confirmation"]) {
-            $this->redirect("account-register?password_incorrect");
+            $this->redirect("account-list?password_not_matching");
         }
 
         // Stores the account information
@@ -87,10 +87,10 @@ class UserController extends Controller
         );
 
         if (!$success) {
-            $this->redirect("account-register?account_creation_fail");
+            $this->redirect("account-list?account_creation_fail");
         }
 
-        $this->redirect("index?register_success");
+        $this->redirect("account-list?register_success");
     }
 
     /**
@@ -101,7 +101,7 @@ class UserController extends Controller
     public function connect()
     {
         if (empty($_POST["email"]) || empty($_POST["password"])) {
-            $this->redirect("index?information_missing");
+            $this->redirect("admin?information_missing");
         }
 
         $user_model = new User;
@@ -112,7 +112,7 @@ class UserController extends Controller
 
 
         if (!$user || !password_verify($_POST["password"], $user->password)) {
-            $this->redirect("index?information_invalid");
+            $this->redirect("admin?information_invalid");
         }
 
         $_SESSION["user_id"] = $user->id;
@@ -132,7 +132,7 @@ class UserController extends Controller
     }
 
     /**
-     * stores menu item information
+     * Stores menu item information
      *
      * @return void
      */
@@ -167,7 +167,6 @@ class UserController extends Controller
             $_POST["price"],
             $_POST["section"],
         );
-
         if (!$success) {
             $this->redirect("content-menu-add?error");
         }
@@ -183,6 +182,11 @@ class UserController extends Controller
         $this->redirect("admin-panel?add_success");
     }
 
+    /**
+     * Displays the page of a menu item using a given id
+     *
+     * @return void
+     */
     public function showMenuItem()
     {
         $this->protectRoute();
@@ -191,6 +195,11 @@ class UserController extends Controller
         $this->view("admin/modify", ["dish" => $dish, "categories" => (new Category)->getCategories(),"sections" => (new Category)->getSections()]);
     }
 
+    /**
+     * Modifies a menu item
+     *
+     * @return void
+     */
     public function modifyMenuItem()
     {
 
@@ -251,6 +260,11 @@ class UserController extends Controller
 
 
 
+    /**
+     * Displays the page with the list of every user
+     *
+     * @return void
+     */
     public function accountIndex()
     {
         $this->protectRoute();
@@ -265,11 +279,24 @@ class UserController extends Controller
         $this->view("admin/account.index", ["users" => (new User)->tout()]);
     }
 
+    /**
+     * Deletes an account from the database using a given id
+     *
+     * @return void
+     */
     public function deleteAccount()
     {
         $this->protectRoute();
 
         //Checks for access level
+        $user_model = new User;
+        $role = $user_model->getRole($_SESSION["user_id"]);
+
+        if ($role->role != 1) {
+            $this->redirect("admin-panel?access_denied");
+        }
+
+        //Checks to make sure not to delete an admin account
         $user_model = new User;
         $role = $user_model->getRole($_GET["id"]);
 
@@ -287,7 +314,12 @@ class UserController extends Controller
 
     }
 
-    public function categoryIndex()
+    /**
+     * Displays the list of every section
+     *
+     * @return void
+     */
+    public function sectionIndex()
     {
         $this->protectRoute();
 
@@ -302,6 +334,11 @@ class UserController extends Controller
 
     }
 
+    /**
+     * Stores a new section
+     *
+     * @return void
+     */
     public function storeSection()
     {
         $this->protectRoute();
@@ -332,6 +369,11 @@ class UserController extends Controller
         $this->redirect("content-category-list?add_success");
     }
 
+    /**
+     * Deletes a section using a given id
+     *
+     * @return void
+     */
     public function deleteSection()
     {
         $this->protectRoute();
@@ -353,6 +395,11 @@ class UserController extends Controller
         $this->redirect("content-category-list?delete_success");
     }
 
+    /**
+     * Modifies a section using a given id
+     *
+     * @return void
+     */
     public function modifySection()
     {
 
@@ -388,8 +435,14 @@ class UserController extends Controller
             $this->redirect("content-category-list?error");
         }
 
-        $this->redirect("content-category-list?success");
+        $this->redirect("content-category-list?edit_success");
     }
+
+    /**
+     * Delete a menu item
+     *
+     * @return void
+     */
     public function deleteMenuItem()
     {
         $this->protectRoute();

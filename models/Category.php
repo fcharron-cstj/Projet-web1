@@ -8,6 +8,11 @@ class Category extends Model
 {
     protected $table = "categories";
 
+    /**
+     * Returns every category
+     *
+     * @return object
+     */
     public function getCategories()
     {
         $sql = "SELECT $this->table.*
@@ -20,6 +25,11 @@ class Category extends Model
         return $requete->fetchAll();
     }
 
+    /**
+     * Returns every section
+     *
+     * @return object
+     */
     public function getSections()
     {
         $sql = "SELECT sections.*
@@ -32,6 +42,12 @@ class Category extends Model
         return $requete->fetchAll();
     }
 
+    /**
+     * Stores a new section in the database
+     *
+     * @param string $title
+     * @return bool
+     */
     public function storeSection($title)
     {
         $sql = "INSERT INTO sections
@@ -45,6 +61,12 @@ class Category extends Model
         ]);
     }
 
+    /**
+     * Deletes a section from the database using a given id
+     *
+     * @param int $id
+     * @return bool
+     */
     public function deleteSection($id)
     {
         $sql = "DELETE FROM sections
@@ -57,6 +79,13 @@ class Category extends Model
         ]);
     }
 
+    /**
+     * modifies a section from the database
+     *
+     * @param int $id
+     * @param string $title
+     * @return bool
+     */
     public function modifySection($id, $title)
     {
         $sql = "UPDATE sections
