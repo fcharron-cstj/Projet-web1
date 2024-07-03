@@ -1,5 +1,23 @@
 
 
+//Map
+function openMap(e) {
+    e.preventDefault()
+    let map = document.querySelector(".map")
+    map.style.display = "block";
+    document.querySelector(".mapcontainer").style.display = "block";
+
+
+    document.addEventListener("click", (e) => {
+        if (e.target != map && e.target != button) {
+            map.style.display = "none";
+            document.querySelector(".mapcontainer").style.display = "none";
+        }
+    });
+}
+let button = document.querySelector(".mapbutton");
+button.addEventListener("click", (e) => openMap(e))
+
 //Commentaires
 let comments = [
     ["Excellent service et de la nourriture absolument délicieuse!", 5],
@@ -58,7 +76,7 @@ function openNav() {
     const menu = document.createElement("a");
     menu.className = "mobilenavbuttons"
     menu.innerHTML = "Notre menu"
-    menu.href = "#menu";
+    menu.href = "index";
     const about = document.createElement("a");
     about.className = "mobilenavbuttons"
     about.innerHTML = "À propos"
@@ -66,7 +84,7 @@ function openNav() {
     const career = document.createElement("a");
     career.className = "mobilenavbuttons";
     career.innerHTML = "Carrières";
-    career.href = "about";
+    career.href = "about#careers";
     dark.appendChild(navigation);
     dark.parentNode.insertBefore(navigation, dark);
 

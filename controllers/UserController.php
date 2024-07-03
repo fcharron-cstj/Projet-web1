@@ -171,8 +171,10 @@ class UserController extends Controller
             $this->redirect("content-menu-add?error");
         }
 
+        $dish_id = (new Dish)->getLastId();
+
         foreach ($_POST["categories"] as $category) {
-            $success = $dish_model->addMenuCategories($category);
+            $success = $dish_model->addMenuCategories($category, $dish_id);
             if (!$success) {
                 $this->redirect("content-menu-add?error");
             }

@@ -33,12 +33,12 @@
             <?php endif; ?>
             <?php if (isset($_GET["modify_success"])): ?>
                 <p class="error">
-                Dish has been edited successfully
+                    Dish has been edited successfully
                 </p>
             <?php endif; ?>
             <?php if (isset($_GET["modify_success"])): ?>
                 <p class="success">
-                Dish has been deleted successfully
+                    Dish has been deleted successfully
                 </p>
             <?php endif; ?>
         </div>
@@ -58,6 +58,7 @@
                                 <a href="content-menu-delete?id=<?= $dish->id ?>" class="delete">Delete</a>
                             </div>
                         </ul>
+                        
                     <?php endif; endforeach; endforeach; ?>
         </div>
         <div class="otherdishes">

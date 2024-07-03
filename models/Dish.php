@@ -94,7 +94,7 @@ class Dish extends Model
      */
     public function getDishFromId($id)
     {
-        $sql = "SELECT DISTINCT $this->table.id, $this->table.title, $this->table.description, $this->table.price, $this->table.section_id, GROUP_CONCAT(dish_category.category_id) as categories 
+        $sql = "SELECT DISTINCT $this->table.id, $this->table.title, $this->table.description, $this->table.price, $this->table.section_id, $this->table.image, GROUP_CONCAT(dish_category.category_id) as categories 
                 FROM $this->table
                 JOIN dish_category
                     ON $this->table.id = dish_category.dish_id

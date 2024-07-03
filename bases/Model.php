@@ -14,8 +14,8 @@ class Model
      */
     protected function pdo()
     {
-        if(self::$pdo == null){
-            $env = parse_ini_file(".env");            
+        if (self::$pdo == null) {
+            $env = parse_ini_file(".env");
 
             $hote = $env["HOST"];
             $username = $env["USERNAME"];
@@ -31,8 +31,8 @@ class Model
 
             // Connexion
             self::$pdo = new \PDO(
-                "mysql:host=$hote;dbname=$nom_bdd", 
-                $username, 
+                "mysql:host=$hote;dbname=$nom_bdd",
+                $username,
                 $password,
                 $options
             );
@@ -46,7 +46,8 @@ class Model
      *
      * @return array|false
      */
-    public function tout() {
+    public function tout()
+    {
         $sql = "SELECT *
                 FROM $this->table";
 
@@ -63,7 +64,7 @@ class Model
      * @param integer $id L'id ciblé
      * @return object|false
      */
-    public function parId(int $id) : object|false
+    public function parId(int $id): object|false
     {
         $sql = "SELECT *
                 FROM $this->table
@@ -76,5 +77,15 @@ class Model
         ]);
 
         return $requete->fetch();
+    }
+
+    /**
+     * Returns the last id inserted in the database; uses lastInsertId from PDO
+     *
+     * @return int
+     */
+    public function getLastId()
+    {
+        return $this->pdo()->lastInsertId();
     }
 }

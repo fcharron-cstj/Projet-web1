@@ -54,7 +54,7 @@ color:white;
     background-color: rgb(7, 141, 2);
     padding:5px;
 }
-input{
+input,textarea{
     border:solid 2px #D60000;
     background-color: #fff;
     color:black;
@@ -87,7 +87,7 @@ input{
 }
 .buttons{
     display: flex;
-    gap:40px;
+    gap:65px;
     margin-top: 5px;
 }
 .edit{
@@ -109,4 +109,15 @@ input{
     display: block;
     margin-top: 10px;
     color:white;
+}
+.modifycontainer{
+    display: flex;
+}
+#preview div{
+    display: flex;
+    justify-content: space-between
+}
+.textarea{
+    width:150px;
+    height:100px;
 }

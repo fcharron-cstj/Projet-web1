@@ -1,8 +1,15 @@
 <?php include ("views/components/head.php") ?>
+<div class="mapcontainer">
+
+</div>
+<iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2782.7467856551316!2d-74.00559052307652!3d45.77626467108082!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccf2ca136664c05%3A0x90430ecdc061500!2s297%20Rue%20Saint-Georges%2C%20Saint-J%C3%A9r%C3%B4me%2C%20QC%20J7Z%205A2!5e0!3m2!1sfr!2sca!4v1720024952600!5m2!1sfr!2sca"
+    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade" class="map"></iframe>
 <div class="container">
     <nav>
         <a href="index"><img src="public/img/logo.png" alt="" id="logo"></a>
-        <a href="index" class="desktopnav">Menu</a>
+        <a href="index" class="desktopnav" style="text-decoration:underline">Menu</a>
         <a href="about" class="desktopnav">À propos</a>
         <a href="about#careers" class="desktopnav">Carrières</a>
         <p class="desktopnav">450 436-1531</p>
@@ -18,12 +25,12 @@
                 <select class="menu-select">
 
                     <?php foreach ($sections as $section): ?>
-                        <option value="<?=$section->title?>"><?=$section->title?></option>
+                        <option value="<?= $section->title ?>"><?= $section->title ?></option>
                     <?php endforeach; ?>
                 </select>
                 <ul id="buttons">
                     <?php foreach ($sections as $section): ?>
-                        <a href="#"><?=$section->title?></a>
+                        <a href="#"><?= $section->title ?></a>
                     <?php endforeach; ?>
                 </ul>
             </section>
@@ -61,9 +68,12 @@
                 <span> 450 436-1531</span>
             </ul>
             <ul class="media-icons" id="media-icons">
-                <img src="public/img/facebook.svg" alt="">
-                <img src="public/img/twitter.svg" alt="">
-                <img src="public/img/instagram.svg" alt="">
+                <a href="https://facebook.com/">
+                    <img src="public/img/facebook.svg" alt=""></a>
+                <a href="https://x.com/">
+                    <img src="public/img/twitter.svg" alt=""></a>
+                <a href="https://instagram.com/">
+                    <img src="public/img/instagram.svg" alt=""></a>
             </ul>
             <img src="" alt="">
         </section>
@@ -102,6 +112,7 @@
                 <input type="submit" class="submitButton">
             </form>
         </section>
+        <a href="" class="mapbutton location">Find our location</a>
     </footer>
 </div>
 <script src="public/js/menu.js"></script>
