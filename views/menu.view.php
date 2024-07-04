@@ -9,9 +9,11 @@
 <div class="container">
     <nav>
         <a href="index"><img src="public/img/logo.png" alt="" id="logo"></a>
-        <a href="index" class="desktopnav" style="text-decoration:underline">Menu</a>
-        <a href="about" class="desktopnav">À propos</a>
-        <a href="about#careers" class="desktopnav">Carrières</a>
+        <div class="desktop">
+            <a href="index" class="desktopnav" style="text-decoration:underline">Menu</a>
+            <a href="about" class="desktopnav">À propos</a>
+            <a href="about#careers" class="desktopnav">Carrières</a>
+        </div>
         <p class="desktopnav">450 436-1531</p>
         <img src="public/img/mobilenav.svg" alt="" class="mobilenav">
     </nav>
@@ -106,13 +108,13 @@
             <?php endif; ?>
             <h4>Abonnez-vous à notre infolettre! <img src="public/img/mail.svg" alt=""></h4>
             <form action="newsletter-subscribe" method="post">
-                <input type="text" name="first_name" placeholder="Prénom" class="inputField">
-                <input type="text" name="last_name" placeholder="Nom de famille" class="inputField">
-                <input type="email" name="email" placeholder="Courriel" class="inputField">
+                <input type="text" name="first_name" placeholder="Prénom" class="inputField" autocomplete="given-name">
+                <input type="text" name="last_name" placeholder="Nom de famille" class="inputField" autocomplete="family-name">
+                <input type="email" name="email" placeholder="Courriel" class="inputField" autocomplete="email">
                 <input type="submit" class="submitButton">
             </form>
         </section>
-        <a href="" class="mapbutton location">Find our location</a>
+        <a href="" class="mapbutton location">Location</a>
     </footer>
 </div>
 <script src="public/js/menu.js"></script>

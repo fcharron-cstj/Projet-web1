@@ -37,7 +37,7 @@ function changeComment(comments, target) {
 
     let stars = comments[rand][1]
     let halfstar = false
-    stars % 1 != 0 ? (halfstar = true) : (halfstar = false)
+    halfstar = stars % 1 != 0 ? true : false
     stars = Math.floor(stars)
     addStar(0, stars, halfstar, document.querySelectorAll(".star-container img"))
 }

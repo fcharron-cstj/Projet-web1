@@ -215,17 +215,16 @@ class UserController extends Controller
             empty($_POST["title"]) ||
             empty($_POST["description"]) ||
             empty($_POST["price"]) ||
-            empty($_FILES["image"]) ||
             empty($_POST["categories"]) ||
             empty($_POST["section"])
         ) {
 
             $this->redirect("content-menu-show?id=" . $_POST['id'] . "?missing_info");
         }
-
         // Stores the image
-        $image = null;
-        if (!empty($_FILES["image"])) {
+        $image = (new Dish)->getDishFromId($_POST["id"])->image;
+
+        if (($_FILES["image"]["name"]) != "") {
             $upload = new Upload("image");
             $image = $upload->InsertInto("uploads");
         }

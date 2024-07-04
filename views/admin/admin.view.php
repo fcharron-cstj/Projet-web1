@@ -26,17 +26,17 @@
                     Dish has been added successfully
                 </p>
             <?php endif; ?>
-            <?php if (isset($_GET["add_success"])): ?>
+            <?php if (isset($_GET["error"])): ?>
                 <p class="error">
                     An error has occured
                 </p>
             <?php endif; ?>
             <?php if (isset($_GET["modify_success"])): ?>
-                <p class="error">
+                <p class="success">
                     Dish has been edited successfully
                 </p>
             <?php endif; ?>
-            <?php if (isset($_GET["modify_success"])): ?>
+            <?php if (isset($_GET["delete_success"])): ?>
                 <p class="success">
                     Dish has been deleted successfully
                 </p>

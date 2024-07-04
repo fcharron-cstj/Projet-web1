@@ -36,6 +36,11 @@
                     The account has been registered successfully
                 </p>
             <?php endif; ?>
+            <?php if (isset($_GET["delete-success"])): ?>
+                    <p class="success">
+                        A user was deleted successfully
+                    </p>
+                <?php endif; ?>
             </div>
             <h2>List of users</h2>
             <?php foreach ($users as $user):

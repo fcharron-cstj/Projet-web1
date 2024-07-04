@@ -16,26 +16,33 @@
         <h1>Edit an existing section</h1>
         <section class="form">
             <!-- Messages -->
-            <?php if (isset($_GET["missing_info"])): ?>
-                <p class="error">
-                    Information is missing
-                </p>
-            <?php endif; ?>
-            <?php if (isset($_GET["error"])): ?>
-                <p class="error">
-                    An error occured
-                </p>
-            <?php endif; ?>
-            <?php if (isset($_GET["add_success"])): ?>
-                <p class="success">
-                    A section was added successfully
-                </p>
-            <?php endif; ?>
-            <?php if (isset($_GET["edit_success"])): ?>
-                <p class="success">
-                    A section was edited successfully
-                </p>
-            <?php endif; ?>
+            <div class="msg">
+                <?php if (isset($_GET["missing_info"])): ?>
+                    <p class="error">
+                        Information is missing
+                    </p>
+                <?php endif; ?>
+                <?php if (isset($_GET["error"])): ?>
+                    <p class="error">
+                        An error occured
+                    </p>
+                <?php endif; ?>
+                <?php if (isset($_GET["add_success"])): ?>
+                    <p class="success">
+                        A section was added successfully
+                    </p>
+                <?php endif; ?>
+                <?php if (isset($_GET["edit_success"])): ?>
+                    <p class="success">
+                        A section was edited successfully
+                    </p>
+                <?php endif; ?>
+                <?php if (isset($_GET["delete_success"])): ?>
+                    <p class="success">
+                        A section was deleted successfully
+                    </p>
+                <?php endif; ?>
+            </div>
             <?php foreach ($sections as $section): ?>
                 <form action="content-category-modify" method="POST">
                     <span>Modifier Section <?= $section->title ?></span><br>

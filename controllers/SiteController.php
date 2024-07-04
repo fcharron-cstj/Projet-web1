@@ -43,7 +43,7 @@ class SiteController extends Controller
             empty($_POST["last_name"]) ||
             empty($_POST["email"])
         ) {
-            $this->redirect("index#newsletter?newsletter_missing");
+            $this->redirect("index?newsletter_missing#newsletter");
         }
         $success = (new Newsletter)->store(
             $_POST["first_name"],
@@ -52,9 +52,9 @@ class SiteController extends Controller
         );
 
         if (!$success) {
-            $this->redirect("index#newsletter?newsletter_error");
+            $this->redirect("index?newsletter_error#newsletter");
         }
 
-        $this->redirect("index#newsletter?newsletter_success");
+        $this->redirect("index?newsletter_success#newsletter");
     }
 }
